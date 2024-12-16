@@ -36,7 +36,8 @@ defmodule KsMessanger.Accounts do
 
   """
   def get_user!(id), do: Repo.get!(User, id)
-
+  
+  
   @doc """
   Creates a user.
 
@@ -101,4 +102,6 @@ defmodule KsMessanger.Accounts do
   def change_user(%User{} = user, attrs \\ %{}) do
     User.changeset(user, attrs)
   end
+  
+  
 end

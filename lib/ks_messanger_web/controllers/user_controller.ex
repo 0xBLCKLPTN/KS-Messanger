@@ -40,4 +40,18 @@ defmodule KsMessangerWeb.UserController do
       send_resp(conn, :no_content, "")
     end
   end
+  
+  def get_user_by_username_and_password(username, password) do
+      user = Repo.get_by(User, username: username)
+      
+      case user do
+        nil -> {:error, :unauthorized}
+        _ ->
+          if Bcrypt.checkpw(password, user.password_hash) do
+            {:ok, user}
+          else
+            {:error, :unauthorized}
+          end
+      end
+    end
 end
