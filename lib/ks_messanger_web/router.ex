@@ -10,14 +10,7 @@ defmodule KsMessangerWeb.Router do
     resources "/users", UserController
     resources "/chats", ChatController
     resources "/message", MessageController
-    post "/login", AuthController, :login
-    
-    scope "/protected" do
-        plug Guardian.Plug.VerifyHeader
-        plug Guardian.Plug.EnsureAuthenticated
-        
-        get "/", ProtectedController, :index
-      end
+    post("/get_token", AuthController, :get_token)
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

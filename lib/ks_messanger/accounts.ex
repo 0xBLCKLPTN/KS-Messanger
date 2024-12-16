@@ -7,7 +7,21 @@ defmodule KsMessanger.Accounts do
   alias KsMessanger.Repo
 
   alias KsMessanger.Accounts.User
-
+  
+  def get_user_by_username_and_password(username, password) do
+      user = Repo.get_by(User, username: username)
+      
+      case user do
+        nil -> {:error, :unauthorized}
+        _ ->
+          if Bcrypt.verify_pass(password, user.password_hash) do
+            {:ok, user}
+          else
+            {:error, :unauthorized}
+          end
+      end
+    end
+    
   @doc """
   Returns the list of users.
 
