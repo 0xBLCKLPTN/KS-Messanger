@@ -10,7 +10,7 @@ defmodule KsMessangerWeb.Router do
     resources "/users", UserController
     resources "/chats", ChatController
     resources "/message", MessageController
-    post("/get_token", AuthController, :get_token)
+    post("/login", AuthController, :get_token)
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
